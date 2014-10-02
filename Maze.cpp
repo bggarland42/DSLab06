@@ -46,17 +46,17 @@ Cell* Maze::processBackTrack(StackLinked<Cell>* stack)
    //top_cell is NULL if the stack is empty
    //top_cell's direction is DEAD_END if you need to keep backtracking
 
-   while (                                        )  //need to back track
+   while (top_cell->getDir() == DEAD_END)  //need to back track
    {
-      
-
 
       //remove the cell and set the maze location to BACKTRACK (the maze is a Matrix)
 
-
+      Cell* removed = stack->pop();
+      maze->Matrix::setElement(removed->getRow(), removed->getCol(), BACKTRACK);
 
       //look at the next cell
 
+      top_cell = top_cell->nextCell();
 
 
 
@@ -166,6 +166,7 @@ bool Maze::traverse()
          Sleep(75);  //slow down the maze traversal
          gui->update();
       }
+
       else //look for a different route 
       {
          //DO THIS
