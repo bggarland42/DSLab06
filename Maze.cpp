@@ -53,7 +53,7 @@ Cell* Maze::processBackTrack(StackLinked<Cell>* stack)
       maze -> setElement(removed -> getRow(), removed -> getCol(), BACKTRACK);
 
       //look at the next cell
-      top_cell = top_cell -> nextCell();
+      top_cell = stack -> peek(); //I changed this!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
       Sleep(75);      //slow down the maze traversal
       gui->update();  //update whenever the color of a cell has been changed
@@ -71,14 +71,13 @@ bool Maze::isSolved(Cell* curr_cell, StackLinked<Cell>* stack)
    double element = maze -> getElement(row, col);
 
    //have you solved the maze? (check that we are at the bottom right maze location and that it is a SPACE
-   if (element == SPACE)  
+   if (element == SPACE && row == height && col == width)  
    {
       //set the maze location to TRIED
       maze -> setElement(row, col, TRIED);
 
       //push curr_cell
       stack -> push(curr_cell);
-
 
       gui->update();
       //return the appropriate boolean
@@ -153,7 +152,7 @@ bool Maze::traverse()
       {
          //DO THIS
          //delete the cell
-         curr_cell = stack.pop();
+         delete curr_cell;
       }
    }
 
