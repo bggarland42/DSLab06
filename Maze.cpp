@@ -68,14 +68,13 @@ bool Maze::isSolved(Cell* curr_cell, StackLinked<Cell>* stack)
    //get row and col from curr_cell
    int row = curr_cell -> getRow();
    int col = curr_cell -> getCol();
-
    double element = maze -> getElement(row, col);
 
    //have you solved the maze? (check that we are at the bottom right maze location and that it is a SPACE
    if (element == SPACE)  
    {
       //set the maze location to TRIED
-      maze -> setElement(curr_cell -> getRow(), curr_cell -> getCol(), TRIED);
+      maze -> setElement(row, col, TRIED);
 
       //push curr_cell
       stack -> push(curr_cell);
@@ -94,7 +93,7 @@ void Maze::processSolution(StackLinked<Cell>* stack)
 {
    //DO THIS
    //the stack has the solution path stored
-   while (!stack -> isEmpty())
+   while(!stack -> isEmpty())
    {
       //get the next cell from the stack
       Cell* curr_cell = stack -> pop();
@@ -127,11 +126,7 @@ bool Maze::traverse()
 
       //call a method in the Cell class to give you a new Cell in a new direction relative to top_cell (initially, DOWN)
       //DO THIS
-      Cell* curr_cell = 
-
-
-
-
+      Cell* curr_cell = top_cell -> nextCell();
 
       //does this new Cell solve the maze?
       done = isSolved(curr_cell, &stack);
@@ -139,20 +134,17 @@ bool Maze::traverse()
 
       //DO THIS
       //get the row and col from curr_cell
-      int row = 
-      int col = 
+      int row = curr_cell -> getRow();
+      int col = curr_cell -> getCol();
+      double element = maze -> getElement(row, col);
 
       //check that the current cell corresponds to SPACE, otherwise delete it
-      if (                                           )
+      if (element == SPACE)
       {
          //update the cell to TRIED
          //put the cell on the stack (move forward through the maze)
-
-
-
-
-
-
+         maze -> setElement(row, col, TRIED);
+         stack.push(curr_cell);
 
          Sleep(75);  //slow down the maze traversal
          gui->update();
@@ -161,8 +153,7 @@ bool Maze::traverse()
       {
          //DO THIS
          //delete the cell
-
-
+         curr_cell = stack.pop();
       }
    }
 
