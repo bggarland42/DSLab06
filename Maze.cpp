@@ -94,7 +94,7 @@ void Maze::processSolution(StackLinked<Cell>* stack)
 {
    //DO THIS
    //the stack has the solution path stored
-   while(!stack -> isEmpty())
+   while (!stack -> isEmpty())
    {
       //get the next cell from the stack
       Cell* curr_cell = stack -> pop();
