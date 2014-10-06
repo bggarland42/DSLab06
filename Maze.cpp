@@ -48,12 +48,14 @@ Cell* Maze::processBackTrack(StackLinked<Cell>* stack)
 
    while (top_cell -> getDir() == DEAD_END)  //need to back track
    {
+
       //remove the cell and set the maze location to BACKTRACK (the maze is a Matrix)
       Cell* removed = stack -> pop();
       maze -> setElement(removed -> getRow(), removed -> getCol(), BACKTRACK);
 
       //look at the next cell
       top_cell = stack -> peek(); //I changed this!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+      if(top_cell == NULL) return NULL;
 
       Sleep(75);      //slow down the maze traversal
       gui->update();  //update whenever the color of a cell has been changed
